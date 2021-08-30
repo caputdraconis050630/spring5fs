@@ -1,13 +1,16 @@
 package com.caput.sp5chap03.main;
 
 import com.caput.sp5chap03.assembler.Assembler;
+import com.caput.sp5chap03.config.AppCtx;
 import com.caput.sp5chap03.spring.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class MainForAssembler {
+public class MainForSpring {
 
 
     // 도움말 출력 메소드
@@ -21,7 +24,7 @@ public class MainForAssembler {
     }
 
 
-    private static Assembler assembler = new Assembler();
+    private static ApplicationContext ctx = null;
 
     private static void processNewCommand(String[] arg){
         // 입력된 값이 {"new", "a@a.com", "이름", "암호", "암호 확인"} 의 규정을 지키지 않을 시에 도움말 출력
@@ -29,7 +32,7 @@ public class MainForAssembler {
             printHelp();
             return;
         }
-        MemberRegisterService regSvc = assembler.getMemberRegisterService();
+        MemberRegisterService regSvc = ctx.getBean("memberRegSvc", MemberRegisterService.class);
         RegisterRequest req = new RegisterRequest();
         req.setEmail(arg[1]);
         req.setName(arg[2]);
@@ -56,7 +59,7 @@ public class MainForAssembler {
             return;
         }
 
-        ChangePasswordService changePasswordService = assembler.getChangePasswordService();
+        ChangePasswordService changePasswordService = ctx.getBean("changePwdSvc", ChangePasswordService.class);
 
         try{
             changePasswordService.changePassword(arg[1], arg[2], arg[3]);
@@ -68,25 +71,26 @@ public class MainForAssembler {
         }
     }
 
-//    public static void main(String[] args) throws IOException{
-//        BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
-//
-//        while(true){
-//            System.out.println("명령어를 입력하세요");
-//            String command = reader.readLine();
-//            if(command.equalsIgnoreCase("exit")){
-//                System.out.println("종료합니다.");
-//                break;
-//            }
-//            if(command.startsWith("new ")){
-//                processNewCommand(command.split(" "));
-//                continue;
-//            }
-//            else if(command.startsWith("change ")){
-//                processChangeCommand(command.split(" "));
-//                continue;
-//            }
-//            printHelp();
-//        }
-//    }
+    public static void main(String[] args) throws IOException{
+        ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+        BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
+
+        while(true){
+            System.out.println("명령어를 입력하세요");
+            String command = reader.readLine();
+            if(command.equalsIgnoreCase("exit")){
+                System.out.println("종료합니다.");
+                break;
+            }
+            if(command.startsWith("new ")){
+                processNewCommand(command.split(" "));
+                continue;
+            }
+            else if(command.startsWith("change ")){
+                processChangeCommand(command.split(" "));
+                continue;
+            }
+            printHelp();
+        }
+    }
 }

@@ -24,7 +24,7 @@ public class MainForSpring {
     }
 
 
-    private static ApplicationContext ctx = null;
+    private static ApplicationContext ctx = null; // 일단 선언~
 
     private static void processNewCommand(String[] arg){
         // 입력된 값이 {"new", "a@a.com", "이름", "암호", "암호 확인"} 의 규정을 지키지 않을 시에 도움말 출력

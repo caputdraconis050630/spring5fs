@@ -1,9 +1,6 @@
 package com.caput.sp5chap03.config;
 
-import com.caput.sp5chap03.spring.ChangePasswordService;
-import com.caput.sp5chap03.spring.Member;
-import com.caput.sp5chap03.spring.MemberDao;
-import com.caput.sp5chap03.spring.MemberRegisterService;
+import com.caput.sp5chap03.spring.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +22,16 @@ public class AppCtx {
         ChangePasswordService pwdSvc = new ChangePasswordService();
         pwdSvc.setMemberDao(memberDao());
         return pwdSvc;
+    }
+
+    @Bean
+    public MemberPrinter memberPrinter(){
+        return new MemberPrinter();
+    }
+
+    @Bean
+    public MemberListPrinter listPrinter(){
+        return new MemberListPrinter(memberDao(), memberPrinter());
     }
 }
 

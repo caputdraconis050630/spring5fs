@@ -12,6 +12,33 @@ import java.io.InputStreamReader;
 
 public class MainForSpring {
 
+    private static ApplicationContext ctx = null; // 일단 선언~
+
+    public static void main(String[] args) throws IOException{
+        ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+        BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
+
+        while(true){
+            System.out.println("명령어를 입력하세요");
+            String command = reader.readLine();
+            if(command.equalsIgnoreCase("exit")){
+                System.out.println("종료합니다.");
+                break;
+            }
+            if(command.startsWith("new ")){
+                processNewCommand(command.split(" "));
+                continue;
+            }
+            else if(command.startsWith("change ")){
+                processChangeCommand(command.split(" "));
+                continue;
+            } else if (command.equals("list")) {
+                processListCommand();
+                continue;
+            }
+            printHelp();
+        }
+    }
 
     // 도움말 출력 메소드
     private static void printHelp(){
@@ -24,7 +51,7 @@ public class MainForSpring {
     }
 
 
-    private static ApplicationContext ctx = null; // 일단 선언~
+
 
     private static void processNewCommand(String[] arg){
         // 입력된 값이 {"new", "a@a.com", "이름", "암호", "암호 확인"} 의 규정을 지키지 않을 시에 도움말 출력
@@ -71,26 +98,10 @@ public class MainForSpring {
         }
     }
 
-    public static void main(String[] args) throws IOException{
-        ctx = new AnnotationConfigApplicationContext(AppCtx.class);
-        BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
-
-        while(true){
-            System.out.println("명령어를 입력하세요");
-            String command = reader.readLine();
-            if(command.equalsIgnoreCase("exit")){
-                System.out.println("종료합니다.");
-                break;
-            }
-            if(command.startsWith("new ")){
-                processNewCommand(command.split(" "));
-                continue;
-            }
-            else if(command.startsWith("change ")){
-                processChangeCommand(command.split(" "));
-                continue;
-            }
-            printHelp();
-        }
+    private static void processListCommand(){
+        MemberListPrinter listPrinter = ctx.getBean("listPrinter", MemberListPrinter.class);
+        listPrinter.printAll();
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.caput.sp5chap03.spring;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,10 @@ public class MemberDao {
 
     public Member selectByEmail(String email) {
         return map.get(email);
+    }
+
+    public Collection<Member> selectAll(){
+        return map.values();
     }
 
     public void insert(Member member) {

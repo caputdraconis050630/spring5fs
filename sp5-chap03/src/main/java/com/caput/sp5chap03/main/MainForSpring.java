@@ -1,6 +1,8 @@
 package com.caput.sp5chap03.main;
 
 import com.caput.sp5chap03.assembler.Assembler;
+import com.caput.sp5chap03.config.AppConf1;
+import com.caput.sp5chap03.config.AppConf2;
 import com.caput.sp5chap03.config.AppCtx;
 import com.caput.sp5chap03.spring.*;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +17,7 @@ public class MainForSpring {
     private static ApplicationContext ctx = null; // 일단 선언~
 
     public static void main(String[] args) throws IOException{
-        ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+        ctx = new AnnotationConfigApplicationContext(AppConf1.class, AppConf2.class);
         BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
 
         while(true){

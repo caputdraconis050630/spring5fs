@@ -1,4 +1,4 @@
-package com.caput.sp5chap03.main;
+package main.java.main;
 
 import com.caput.sp5chap03.assembler.Assembler;
 import com.caput.sp5chap03.spring.*;

@@ -1,4 +1,4 @@
-package com.caput.sp5chap03.assembler;
+package main.java.assembler;
 
 import com.caput.sp5chap03.spring.ChangePasswordService;
 import com.caput.sp5chap03.spring.Member;

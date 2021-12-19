@@ -1,4 +1,4 @@
-package com.caput.sp5chap03.config;
+package main.java.config;
 
 import com.caput.sp5chap03.spring.MemberDao;
 import com.caput.sp5chap03.spring.MemberPrinter;

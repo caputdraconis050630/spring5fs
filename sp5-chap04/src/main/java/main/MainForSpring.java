@@ -1,10 +1,6 @@
 package main.java.main;
 
-import com.caput.sp5chap03.assembler.Assembler;
-import com.caput.sp5chap03.config.AppConf1;
-import com.caput.sp5chap03.config.AppConf2;
-import com.caput.sp5chap03.config.AppCtx;
-import com.caput.sp5chap03.spring.*;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

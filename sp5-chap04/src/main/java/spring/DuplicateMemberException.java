@@ -1,4 +1,4 @@
-package main.java.spring;
+package spring;
 
 public class DuplicateMemberException extends RuntimeException {
 

@@ -1,6 +1,5 @@
-package main.java.config;
+package config;
 
-import com.caput.sp5chap03.spring.*;
 import main.java.spring.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppCtx {
 
     @Bean
-    public MemberDao memberDao(){
+    public .MemberDao memberDao() {
         return new MemberDao();
     }
 
